@@ -1,6 +1,11 @@
-# devbaseline
-May 11, 2016
-We're going to use this as the seed for the Cisco Cloud rotation program .. 
+# Cisco Cloud Rotation Program
+
+## Contents
+
+[Becoming a Command Line Commando](Becoming_a_Command_Line_Commando.md)
+
+
+
 
 Kick off Jenkins
 
