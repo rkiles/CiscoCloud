@@ -8,8 +8,6 @@ So, the first step in installing the Openstack Command Line tools is to first ge
 
 Below are some great tutorials if you need help installing Python 2 on Windows, Mac, or Linux:
 
-[Installing Python on Windows](http://docs.python-guide.org/en/latest/starting/install/win/)
-
 [Installing Python on Linux](http://docs.python-guide.org/en/latest/starting/install/linux/)
 
 [Installing Python on Mac OS X](http://docs.python-guide.org/en/latest/starting/install/osx/)
@@ -52,6 +50,101 @@ Werkzeug (0.11.5)
 ```
 
 Note: Your install may show different libraries.
+
+Now lets install the Openstack Command Line tools:
+
+```
+pip install python-openstackclient
+```
+
+## Getting the “RC" file
+
+Every project gets an rc file when it is created.
+
+1)	Log onto Horizon (The Openstack Web Dashboard) and go to your project  
+2)	Navigate to Access and Security>API Access  
+3)	Click the button “Download Openstack rc file”.  
+![https://i.imgur.com/VZc37UR.png](https://i.imgur.com/VZc37UR.png)
+
+4)	store the file in an easily found directory.  It will have an “.sh” suffix  
+
+## Source the RC file in command line
+
+1)	open terminal and navigate to folder where rc file is located  
+2)	type:
+
+```
+source MyProject.sh
+```
+
+3)	enter your openstack password when prompted  
+
+## Using the Openstack Command Line tools
+
+
+#### 1)	Test your setup by typing simple command such as:
+
+```
+$ nova list
+```
+
+#### 2)	Create a keypair
+
+You can create a new key pair by using the keypair-add command for nova. You pass a name for the key pair as an argument. The public key is then stored in your user profile via the API. The output of the command is the private key.
+
+```
+nova keypair-add myNewKey > ~/.ssh/myNewKey_rsa
+```
+
+#### 3)	Identify your network name, flavors, images, and security groups by issuing following commands :
+
+```
+$ nova flavor-list
+```
+
+```
+$ nova image-list
+```
+```
+$ nova network-list
+```
+```
+$ nova secgroups-list
+```
+
+
+#### 4)	Create a simple instance by leveraging the “nova boot” command!
+
+a.	Nova boot command syntax is :
+
+``` 
+nova boot --image imageID --flavor flavorID --nic net-id=nicID <Instance Name> 
+```
+
+example:
+
+```
+nova boot --image "Ubuntu 14.04 LTS" --flavor "Standard"  --nic net-id=705a8134-a01e-4282-836e-10cb40540283 --security-groups "Allow All" --key-name myNewKey cliCreatedTestInstance
+```
+	
+#### 5)	Show details of the instance
+
+```
+nova  show  cliCreatedTestInstance
+```
+
+
+#### 6)	Connect via ssh using the keypair to the newly created instance
+
+```
+ssh -i ~/.ssh/myNewKey_rsa user@10.128.134.129
+```
+
+# Have Fun!!!
+
+
+
+
 
 
 
